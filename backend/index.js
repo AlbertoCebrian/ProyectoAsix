@@ -1,38 +1,27 @@
 // index.js
 
 const express = require("express");
+const connectDB = require("./db");
+const productosRouter = require("./rutas/productos"); // rutas CRUD de productos
+
 const app = express();
 const PORT = 3000;
 
+// Middleware para leer JSON
 app.use(express.json());
 
-// Conexión a la base de datos 
-
-const connectDB = require("./db");
+// Conexión a MongoDB
 connectDB();
 
-
-const Producto = require("./models/Producto");
-
-app.get("/productos", async (req, res) => {
-  try {
-    const productos = await Producto.find(); // Trae todos los productos de MongoDB
-    res.json(productos);
-  } catch (error) {
-    res.status(500).json({ message: "Error al obtener productos" });
-  }
-});
-
-
+// Ruta de prueba para verificar que el servidor funciona
 app.get("/", (req, res) => {
-  res.send("Clinton la chupa🚀");
+  res.send("Servidor funcionando 🚀");
 });
 
-app.get("/productos", (req, res) => {
-  res.json(productos);
-});
+// Usamos las rutas de productos
+app.use("/productos", productosRouter);
 
+// Arrancamos el servidor
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
-
