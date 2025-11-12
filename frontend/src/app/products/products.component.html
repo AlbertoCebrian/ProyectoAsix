@@ -1,0 +1,23 @@
+<h1> Productos Destacados</h1>
+<div class="products-container">
+  <div class="product-card" *ngFor="let product of products" (click)="openProduct(product)">
+    <img [src]="product.image" alt="{{product.name}}">
+    <h3>{{ product.name }}</h3>
+    <p>{{ product.price | currency:'EUR' }}</p>
+  </div>
+</div>
+
+<!-- Modal emergente -->
+<div class="product-modal" *ngIf="selectedProduct">
+  <div class="modal-content">
+    <span class="close" (click)="closeModal()">&times;</span>
+    <h2>{{ selectedProduct.name }}</h2>
+    <img [src]="selectedProduct.image" alt="{{ selectedProduct.name }}">
+    <p><strong>Precio:</strong> {{ selectedProduct.price | currency:'EUR' }}</p>
+    <p><strong>Descripción:</strong> {{ selectedProduct.description }}</p>
+    <p><strong>Especificaciones:</strong></p>
+    <ul>
+      <li *ngFor="let spec of selectedProduct.specs">{{ spec }}</li>
+    </ul>
+  </div>
+</div>

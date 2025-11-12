@@ -10,7 +10,7 @@ const productoSchema = new mongoose.Schema({
   categoria: { 
     type: String, 
     required: true, 
-    enum: ["Procesador", "Tarjeta gráfica", "RAM", "Almacenamiento", "Periférico"] 
+    enum: ["Procesador", "Tarjeta gráfica", "RAM", "SSD", "HDD", "Placa base", "Fuente de alimentación", "Caja", "Refrigeración", "Monitor", "Raton", "Teclado", "Otros"] 
   },
   proveedorId: { type: mongoose.Schema.Types.ObjectId, ref: "Proveedor" },
   imagenes: [{ type: String }],

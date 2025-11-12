@@ -8,4 +8,13 @@ import { RouterModule } from '@angular/router'; // 🔹 importar RouterModule
  templateUrl: './header.component.html',   // 🔹 usar el archivo HTML externo
   styleUrls: ['./header.component.css']
 })
-export class HeaderComponent {}
+export class HeaderComponent {
+  isLoggedIn = false; // normalmente vendrá de un servicio Auth
+  userName = 'Babaji';
+
+  logout() {
+    // Llamada a servicio para cerrar sesión
+    this.isLoggedIn = false;
+  }
+}
+
