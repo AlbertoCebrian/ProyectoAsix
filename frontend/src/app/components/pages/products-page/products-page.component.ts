@@ -1,45 +1,49 @@
-// frontend/src/app/components/pages/products-page/products-page.component.ts
-
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common'; 
-import { RouterModule } from '@angular/router'; 
-
-// --- ¡¡AQUÍ ESTÁ LA CORRECCIÓN!! ---
-// El FICHERO es 'products.service' (plural), pero la CLASE es 'ProductService' (singular)
-import { ProductService } from '../../../services/products.service'; // <-- Así SÍ.
-import { Product } from '../../../shared/models/product.model'; 
+import { CommonModule } from '@angular/common';
+import { RouterModule, ActivatedRoute } from '@angular/router'; // Importamos ActivatedRoute
+import { ProductService } from '../../../services/products.service';
+import { Product } from '../../../shared/models/product.model';
 
 @Component({
   selector: 'app-products-page',
-  standalone: true, 
-  imports: [
-    CommonModule, 
-    RouterModule  
-  ],
+  standalone: true,
+  imports: [CommonModule, RouterModule],
   templateUrl: './products-page.component.html',
-  styleUrl: './products-page.component.css'
+  styleUrls: ['./products-page.component.css']
 })
-export class ProductsPageComponent implements OnInit { 
+export class ProductsPageComponent implements OnInit {
 
+  // 1. Variables para la lista y filtros
   products: Product[] = [];
-  
-  // --- Lógica del Bloque 2 AÑADIDA ---
-  selectedProduct: Product | null = null; 
-  // ----------------------------------
+  categoryFilter: string | null = null;
 
-  // --- ¡¡AQUÍ ESTÁ LA CORRECCIÓN!! ---
-  // Usamos la CLASE 'ProductService' (singular)
-  constructor(private productService: ProductService) { } 
+  // 2. Variables para el Modal (¡Las habíamos borrado!)
+  selectedProduct: Product | null = null;
+
+  constructor(
+    private productService: ProductService,
+    private route: ActivatedRoute // Necesario para leer la URL (?category=cpu)
+  ) {}
 
   ngOnInit(): void {
-    // Esta línea ahora SÍ funcionará porque 'productService' está bien inyectado
-    this.productService.getProducts().subscribe(serverProducts => { 
-      this.products = serverProducts;
-      // console.log(this.products); // (Dejamos tu console.log, está perfecto)
+    // Escuchamos cambios en la URL
+    this.route.queryParams.subscribe(params => {
+      this.categoryFilter = params['category']; // Leemos ?category=...
+      
+      // Llamamos al servicio pasando el filtro (o undefined si no hay)
+      this.loadProducts(this.categoryFilter || undefined);
     });
   }
 
-  // --- Lógica del Bloque 2 AÑADIDA ---
+  // Carga los productos (con filtro o sin él)
+  loadProducts(category?: string) {
+    this.productService.getProducts(category).subscribe((serverProducts) => {
+      this.products = serverProducts;
+    });
+  }
+
+  // --- Lógica del Modal (Restaurada) ---
+  
   openProduct(product: Product) {
     this.selectedProduct = product;
   }
@@ -47,5 +51,4 @@ export class ProductsPageComponent implements OnInit {
   closeModal() {
     this.selectedProduct = null;
   }
-  // ----------------------------------
 }

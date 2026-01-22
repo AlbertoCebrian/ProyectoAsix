@@ -1,6 +1,6 @@
+// backend/models/product.model.js
 const mongoose = require("mongoose");
 
-// Convención: variable en inglés
 const productSchema = new mongoose.Schema({
   name: { type: String, required: true, trim: true },
   brand: { type: String, trim: true },
@@ -10,16 +10,13 @@ const productSchema = new mongoose.Schema({
   stock: { type: Number, default: 0, min: 0 },
   category: { 
     type: String, 
-    required: true, 
-    // Asegúrate de que el frontend usa estos mismos strings exactos
+    required: true,
     enum: ["cpu", "gpu", "ram", "ssd", "hdd", "motherboard", "psu", "case", "cooling", "display", "mouse", "keyboard", "others"]
   },
-  // CRÍTICO: Corregido 'suplierId' a 'supplierId' y 'ref' a "Supplier" (Mayúscula)
   supplierId: { type: mongoose.Schema.Types.ObjectId, ref: "Supplier" },
-  images: [{ type: String }],
+  images: [{ type: String }], // Array de strings para las URLs de las fotos
   attributes: { type: Object, default: {} }
 }, { timestamps: true });
 
-productSchema.index({ name: "text", brand: "text", model: "text" });
-
-module.exports = mongoose.model("Product", productSchema);
+// IMPORTANTE: El tercer parámetro fuerza a buscar en la colección "products" (o como se llame en tu Atlas)
+module.exports = mongoose.model("Product", productSchema, "products");

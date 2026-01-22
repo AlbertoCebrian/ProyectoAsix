@@ -1,6 +1,8 @@
 <h1> Productos Destacados</h1>
 <div class="products-container">
 
+  <p>Total productos encontrados: {{ products.length }}</p>
+
   <div class="product-card" *ngFor="let product of products" (click)="openProduct(product)">
     <img [src]="product.images?.[0] || 'assets/images/default-product.png'" alt="{{product.name}}">
     <h3>{{ product.name }}</h3>
@@ -29,3 +31,4 @@
 
   </div>
 </div>
+

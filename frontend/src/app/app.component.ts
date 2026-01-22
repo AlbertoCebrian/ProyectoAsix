@@ -10,7 +10,7 @@ import { CategoryMenuComponent } from './components/partials/category-menu/categ
   selector: 'app-root',
   standalone: true,
   // El array 'imports' está ahora correcto
-  imports: [RouterOutlet, HeaderComponent, CategoryMenuComponent], 
+  imports: [RouterOutlet, HeaderComponent], 
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
