@@ -90,3 +90,53 @@ h1{
   font-size: 1.1rem;
   margin: 10px 0;
 }
+.container {
+  max-width: 1200px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+.page-title {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* --- BARRA DE RESULTADOS --- */
+.results-info {
+  background-color: #f9f9f9;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 30px; /* Separación con las tarjetas */
+  color: #666;
+  font-size: 0.95rem;
+  border-left: 4px solid #ff6000; /* Un toque de color corporativo a la izquierda */
+}
+
+/* --- REJILLA DE PRODUCTOS --- */
+.products-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+  justify-content: flex-start; /* Alineados a la izquierda, no flotando raros */
+}
+
+/* --- SI NO HAY RESULTADOS --- */
+.no-results {
+  text-align: center;
+  margin-top: 50px;
+  padding: 40px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.btn-back {
+  display: inline-block;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background: #333;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+}

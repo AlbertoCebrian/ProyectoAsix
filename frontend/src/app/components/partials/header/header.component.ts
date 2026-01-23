@@ -1,20 +1,27 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router'; // 🔹 importar RouterModule
+import { Router, RouterModule } from '@angular/router'; // Importamos Router
+import { CommonModule } from '@angular/common'
+
 
 @Component({
   selector: 'app-header',
-  standalone: true,       // 🔹 necesario si es standalone
-  imports: [RouterModule],// 🔹 aquí le decimos a Angular que use routerLink
- templateUrl: './header.component.html',   // 🔹 usar el archivo HTML externo
-  styleUrls: ['./header.component.css']
+  standalone: true,
+  imports: [RouterModule, CommonModule],
+  templateUrl: './header.component.html',
+  styleUrl: './header.component.css'
 })
 export class HeaderComponent {
-  isLoggedIn = false; // normalmente vendrá de un servicio Auth
-  userName = 'Babaji';
+  
+  constructor(private router: Router) {}
 
-  logout() {
-    // Llamada a servicio para cerrar sesión
-    this.isLoggedIn = false;
+  // Función que se ejecuta al darle a la lupa o Enter
+  search(term: string): void {
+    if (term) {
+      this.router.navigate(['/products'], { queryParams: { searchTerm: term } });
+    } else {
+      // Si borran el texto, volvemos a ver todos los productos
+      this.router.navigate(['/products']);
+    }
   }
 }
 

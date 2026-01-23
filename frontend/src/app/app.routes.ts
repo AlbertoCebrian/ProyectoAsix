@@ -1,17 +1,15 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './components/pages/home/home.component';
+import { ProductDetailsComponent } from './components/pages/product-details/product-details.component';
 import { ProductsPageComponent } from './components/pages/products-page/products-page.component';
+// IMPORTAR EL COMPONENTE NUEVO
+import { CartPageComponent } from './components/pages/cart-page/cart-page.component'; 
 
 export const routes: Routes = [
-  // 1. La ruta vacía ('') es la Portada. Carga el Home automáticamente.
   { path: '', component: HomeComponent },
-
-  // 2. Dejamos esta ruta por si quieres ver el catálogo completo (opcional)
-  { path: 'products', component: ProductsPageComponent },
-
-  // 3. (Futuro) Aquí pondremos la página de detalle
-  // { path: 'product/:id', component: ProductDetailComponent },
-
-  // 4. Comodín: Si ponen cualquier cosa rara, redirigir al Home
-  { path: '**', redirectTo: '' }
+  { path: 'products', component: ProductsPageComponent }, 
+  { path: 'product/:id', component: ProductDetailsComponent },
+  
+  // AÑADE ESTA LÍNEA EXACTA:
+  { path: 'cart-page', component: CartPageComponent }, 
 ];

@@ -3,6 +3,9 @@
 const express = require("express");
 const cors = require("cors"); // <--- 1. ¡OJO! No tenías CORS, lo necesitas
 const connectDB = require("./db");
+const productRoutes = require("./routes/products.routes");
+const reviewRoutes = require("./routes/reviews.routes");
+
 
 // --- 2. RUTAS (¡Nombres en inglés!) ---
 // Asumimos que has renombrado 'rutas/productos.js' a 'routes/products.routes.js'
@@ -39,4 +42,7 @@ app.use("/api/products", productsRouter); // Antes '/productos'
 // Arrancamos el servidor
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
+
+  app.use("/api/products", productRoutes);
+app.use("/api/reviews", reviewRoutes);
 });

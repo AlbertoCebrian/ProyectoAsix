@@ -1,14 +1,23 @@
 const express = require("express");
 const router = express.Router();
-// FIX: Importar a variable en inglés 'Product'
 const Product = require("../models/product.model");
 
-// GET all products (with optional category filter)
+// 1. GET: Obtener productos (con filtros por categoría Y/O por nombre)
 router.get("/", async (req, res) => {
   try {
-    // FIX: Query por 'category' (inglés)
-    const filter = req.query.category ? { category: req.query.category } : {};
-    // FIX: Usar 'Product.find()' y variable 'products'
+    const { category, searchTerm } = req.query;
+    let filter = {};
+
+    // Si hay categoría, filtramos por ella
+    if (category) {
+      filter.category = category;
+    }
+
+    // Si hay término de búsqueda, buscamos en el nombre (ignorando mayúsculas)
+    if (searchTerm) {
+      filter.name = { $regex: searchTerm, $options: 'i' };
+    }
+
     const products = await Product.find(filter);
     res.json(products);
   } catch (error) {
@@ -16,21 +25,19 @@ router.get("/", async (req, res) => {
   }
 });
 
-// GET one product by ID
+// 2. GET: Obtener UN solo producto por ID (¡Esta faltaba y es vital para el detalle!)
 router.get("/:id", async (req, res) => {
   try {
-    // FIX: Usar 'Product.findById()' y variable 'product'
     const product = await Product.findById(req.params.id);
-    if (!product) return res.status(404).json({ message: "Product not found" });
+    if (!product) return res.status(404).json({ message: "Producto no encontrado" });
     res.json(product);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 });
 
-// POST (create product)
+// 3. POST: Crear producto
 router.post("/", async (req, res) => {
-  // FIX: Usar 'new Product()' y variables en inglés
   const newProduct = new Product(req.body);
   try {
     const savedProduct = await newProduct.save();
@@ -40,10 +47,9 @@ router.post("/", async (req, res) => {
   }
 });
 
-// PUT (update product)
+// 4. PUT: Actualizar producto
 router.put("/:id", async (req, res) => {
   try {
-    // FIX: Usar 'Product.findByIdAndUpdate()' y variable 'updatedProduct'
     const updatedProduct = await Product.findByIdAndUpdate(
       req.params.id,
       req.body,
@@ -56,10 +62,9 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// DELETE (borrar producto)
+// 5. DELETE: Borrar producto
 router.delete("/:id", async (req, res) => {
   try {
-    // FIX: Usar 'Product.findByIdAndDelete()' y variable 'deletedProduct'
     const deletedProduct = await Product.findByIdAndDelete(req.params.id);
     if (!deletedProduct) return res.status(404).json({ message: "Product not found" });
     res.json({ message: "Product deleted" });

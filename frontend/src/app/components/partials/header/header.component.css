@@ -116,3 +116,20 @@ header {
 .menu-container:hover .menu {
   display: flex;
 }
+.logo img {
+  /* Asegura una altura fija para que no se deforme el header */
+  height: 50px; 
+  width: auto;
+
+  /* AQUÍ ESTÁ LA MAGIA: Redondeamos las esquinas */
+  border-radius: 12px; 
+
+  /* OPCIONAL: Una sombra muy suave para que destaque un poco del fondo */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+/* OPCIONAL: Un pequeño efecto al pasar el ratón por encima */
+.logo img:hover {
+  transform: scale(1.05);
+}

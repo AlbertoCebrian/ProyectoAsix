@@ -26,18 +26,23 @@ export class ProductsPageComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    // Escuchamos cambios en la URL
     this.route.queryParams.subscribe(params => {
-      this.categoryFilter = params['category']; // Leemos ?category=...
+      this.categoryFilter = params['category'];
+      const searchTerm = params['searchTerm']; // <--- Leemos la búsqueda
       
-      // Llamamos al servicio pasando el filtro (o undefined si no hay)
-      this.loadProducts(this.categoryFilter || undefined);
+      this.loadProducts(this.categoryFilter || undefined, searchTerm);
     });
   }
 
-  // Carga los productos (con filtro o sin él)
-  loadProducts(category?: string) {
-    this.productService.getProducts(category).subscribe((serverProducts) => {
+  // Actualizamos para recibir los dos filtros
+// En products-page.component.ts
+
+  loadProducts(category?: string, searchTerm?: string) {
+    // TypeScript a veces se queja si pasas null, así que aseguramos undefined
+    const cat = category || undefined;
+    const search = searchTerm || undefined;
+
+    this.productService.getProducts(cat, search).subscribe((serverProducts) => {
       this.products = serverProducts;
     });
   }

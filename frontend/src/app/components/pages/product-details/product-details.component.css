@@ -1,0 +1,272 @@
+/* Contenedor General */
+.page-wrapper {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+/* Breadcrumbs (Miga de pan) */
+.breadcrumb {
+  font-size: 0.9rem;
+  color: #666;
+  margin-bottom: 20px;
+}
+.breadcrumb a { text-decoration: none; color: #666; }
+.breadcrumb a:hover { color: #ff6000; }
+.separator { margin: 0 8px; font-size: 0.8rem; }
+.current { color: #333; font-weight: 600; }
+
+/* Grid Principal (2 Columnas) */
+.main-content-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr; /* Izquierda más ancha, Derecha para la compra */
+  gap: 40px;
+  margin-bottom: 50px;
+}
+
+/* --- SECCIÓN GALERÍA --- */
+.gallery-section {
+  position: relative;
+}
+
+.floating-actions {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 10;
+}
+
+.action-btn {
+  background: white;
+  border: 1px solid #eee;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  transition: all 0.2s;
+  color: #666;
+}
+
+.action-btn:hover { color: #ff6000; transform: scale(1.1); }
+
+.main-image-container {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 450px; /* Altura fija para evitar saltos */
+  background: white;
+}
+
+.main-img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.thumbnails-strip {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  overflow-x: auto;
+  padding-bottom: 5px;
+}
+
+.thumb {
+  width: 70px;
+  height: 70px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 5px;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: all 0.2s;
+}
+
+.thumb.active, .thumb:hover {
+  border-color: #ff6000;
+  opacity: 1;
+}
+
+.thumb img { width: 100%; height: 100%; object-fit: contain; }
+
+
+/* --- SECCIÓN INFO (DERECHA) --- */
+.product-title {
+  font-size: 1.8rem;
+  margin: 0 0 10px 0;
+  line-height: 1.2;
+}
+
+.reviews-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  color: #666;
+}
+.stars { color: #ffb400; font-weight: bold; }
+.rating-text { color: #333; margin-left: 5px; }
+.reviews-count { text-decoration: underline; cursor: pointer; }
+
+/* BUY BOX (Caja de compra estilo PcComp) */
+.buy-box {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 25px;
+  background: #fff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+  margin-bottom: 25px;
+}
+
+.price-area {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.current-price {
+  font-size: 2.2rem;
+  font-weight: 800;
+  color: #333;
+}
+
+.vat-info { font-size: 0.8rem; color: #999; }
+
+.stock-status {
+  font-size: 0.95rem;
+  margin-bottom: 20px;
+  color: #28a745; /* Verde éxito */
+}
+.stock-status strong { display: block; margin-bottom: 2px; }
+.shipping-info { color: #333; font-size: 0.85rem; margin: 0; }
+
+.btn-add-cart {
+  width: 100%;
+  background: #ff6000; /* Naranja PcComponentes */
+  color: white;
+  border: none;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.btn-add-cart:hover { background: #e65600; }
+.btn-add-cart:disabled { background: #ccc; cursor: not-allowed; }
+
+.vendor-info {
+  margin-top: 15px;
+  font-size: 0.85rem;
+  color: #666;
+  text-align: center;
+}
+
+.short-description ul {
+  padding-left: 20px;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* --- SECCIÓN ESPECIFICACIONES --- */
+.specs-section {
+  background: #f9f9f9;
+  padding: 30px;
+  border-radius: 12px;
+  margin-top: 40px;
+}
+
+.specs-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.specs-table td { padding: 15px; border-bottom: 1px solid #eee; }
+.attr-key { width: 30%; background: #fdfdfd; font-weight: 600; color: #555; }
+.attr-val { color: #333; }
+
+/* --- SECCIÓN OPINIONES --- */
+.reviews-section {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  margin-top: 30px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+}
+
+.write-review-box {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 30px;
+  border: 1px solid #eee;
+}
+
+.form-group { margin-bottom: 15px; }
+.form-group label { display: block; margin-bottom: 5px; font-weight: 600; }
+.form-group input, .form-group textarea, .form-group select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+.form-group textarea { height: 80px; resize: vertical; }
+
+.btn-submit-review {
+  background: #333;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.btn-submit-review:hover { background: #000; }
+
+.review-card {
+  border-bottom: 1px solid #eee;
+  padding: 20px 0;
+}
+
+.review-header {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 10px;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  background: #ff6000;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+
+.review-meta { display: flex; flex-direction: column; }
+.review-stars { color: #ffb400; font-size: 1.1rem; }
+.review-date { margin-left: auto; color: #999; font-size: 0.85rem; }
+.review-body { color: #555; line-height: 1.5; }
+.no-reviews { text-align: center; color: #777; font-style: italic; margin-top: 20px;}

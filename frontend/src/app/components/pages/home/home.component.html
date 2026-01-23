@@ -8,7 +8,10 @@
   <div class="categories-preview">
     <h3>Busca por Categoría</h3>
     <div class="cat-grid">
-      <a class="cat-card" *ngFor="let cat of categories" [routerLink]="['/products']" [queryParams]="{ category: cat.id }">
+      <a class="cat-card" 
+         *ngFor="let cat of categories" 
+         [routerLink]="['/products']" 
+         [queryParams]="{ category: cat.id }">
         <span class="cat-name">{{ cat.name }}</span>
       </a>
     </div>
@@ -17,13 +20,14 @@
   <h1>Productos Destacados</h1>
   
   <div class="products-grid">
-    <div class="product-card" *ngFor="let product of products" [routerLink]="['/product', product._id]">
+    <div class="product-card" 
+         *ngFor="let product of products" 
+         [routerLink]="['/product', product._id]">
       
       <div class="image-container">
         <img 
           [src]="product.images && product.images.length > 0 ? product.images[0] : 'assets/images/default-product.png'" 
-          [alt]="product.name"
-        >
+          [alt]="product.name">
       </div>
 
       <div class="info">

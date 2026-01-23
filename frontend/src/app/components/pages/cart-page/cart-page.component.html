@@ -1,0 +1,92 @@
+<div class="container">
+    
+    <div class="cart-header" *ngIf="cart && cart.items.length > 0">
+        <h1>Tu Carrito <span class="count">({{ cart.totalCount }} productos)</span></h1>
+    </div>
+
+    <div class="empty-cart" *ngIf="!cart || cart.items.length === 0">
+        <img src="assets/images/empty-cart.png" alt="Carrito vacío" onerror="this.style.display='none'">
+        <h3>Tu carrito está vacío</h3>
+        <p>¿No sabes qué comprar? ¡Mira nuestras ofertas!</p>
+        <a routerLink="/" class="btn-continue">Ver Productos</a>
+    </div>
+
+    <div class="cart-layout" *ngIf="cart && cart.items.length > 0">
+        
+        <div class="cart-items">
+            <div class="cart-item" *ngFor="let item of cart.items">
+                
+                <div class="item-img">
+                    <img [src]="item.product.images && item.product.images.length > 0 
+                                ? item.product.images[0] 
+                                : 'assets/images/default-product.png'" 
+                         [alt]="item.product.name">
+                </div>
+
+                <div class="item-details">
+                    <a [routerLink]="['/product', item.product._id]" class="product-name">
+                        {{ item.product.name }}
+                    </a>
+                    <span class="product-brand">{{ item.product.brand }}</span>
+                </div>
+
+                <div class="quantity-controls">
+                    <button (click)="changeQuantity(item, item.quantity - 1)" 
+                            [disabled]="item.quantity <= 1">−</button>
+                    
+                    <span class="qty-display">{{ item.quantity }}</span>
+                    
+                    <button (click)="changeQuantity(item, item.quantity + 1)">+</button>
+                </div>
+
+                <div class="item-price">
+                    {{ item.price | currency:'EUR' }}
+                </div>
+
+                <button class="btn-remove" (click)="removeFromCart(item)">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="cart-summary">
+            <h3>Resumen del pedido</h3>
+            <div class="summary-row">
+                <span>Subtotal</span>
+                <span>{{ cart.totalPrice | currency:'EUR' }}</span>
+            </div>
+            <div class="summary-row">
+                <span>Envío</span>
+                <span class="free">Gratis</span>
+            </div>
+            <div class="divider"></div>
+            <div class="summary-total">
+                <span>Total</span>
+                <span class="total-amount">{{ cart.totalPrice | currency:'EUR' }}</span>
+            </div>
+            
+            <a routerLink="/checkout" class="btn-checkout">Tramitar Pedido</a>
+            <a routerLink="/" class="link-continue">Seguir comprando</a>
+        </div>
+    </div>
+
+    <div class="suggestions-section" *ngIf="suggestedProducts.length > 0">
+        <h2>Te podría interesar</h2>
+        <div class="suggestions-grid">
+            <div class="suggestion-card" *ngFor="let product of suggestedProducts" [routerLink]="['/product', product._id]">
+                
+                <img [src]="product.images && product.images.length > 0 
+                            ? product.images[0] 
+                            : 'assets/images/default-product.png'" 
+                     [alt]="product.name">
+                     
+                <div class="suggestion-info">
+                    <p class="s-name">{{ product.name }}</p>
+                    <p class="s-price">{{ product.price | currency:'EUR' }}</p>
+                    <button class="btn-view">Ver</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
