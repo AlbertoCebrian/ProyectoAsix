@@ -1,0 +1,44 @@
+<div class="container">
+  
+  <div class="welcome-header">
+    <h1>Hola, <span class="highlight">{{ user.name }}</span> 👋</h1>
+    <p>Bienvenido a tu panel de control de InfoTec. ¿Qué quieres hacer hoy?</p>
+  </div>
+
+  <div class="dashboard-grid">
+    
+    <a routerLink="/profile" class="card">
+      <div class="icon-box">
+        <i class="fas fa-id-card"></i>
+      </div>
+      <div class="card-info">
+        <h3>Mi Perfil y Puntos</h3>
+        <p>Gestiona tus datos personales y consulta tu nivel de socio InfoTec.</p>
+      </div>
+      <div class="arrow">➜</div>
+    </a>
+
+    <a routerLink="/orders" class="card">
+      <div class="icon-box">
+        <i class="fas fa-box-open"></i>
+      </div>
+      <div class="card-info">
+        <h3>Mis Pedidos</h3>
+        <p>Rastrea tus envíos y consulta tu historial de compras anteriores.</p>
+      </div>
+      <div class="arrow">➜</div>
+    </a>
+
+    <a routerLink="/cart-page" class="card">
+      <div class="icon-box">
+        <i class="fas fa-shopping-cart"></i>
+      </div>
+      <div class="card-info">
+        <h3>Mi Carrito</h3>
+        <p>Revisa los productos que tienes pendientes de comprar.</p>
+      </div>
+      <div class="arrow">➜</div>
+    </a>
+
+  </div>
+</div>

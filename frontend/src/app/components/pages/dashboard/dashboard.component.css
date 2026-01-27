@@ -1,0 +1,98 @@
+.container {
+  max-width: 1000px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.welcome-header {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.welcome-header h1 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.highlight {
+  color: #e60000; /* Rojo InfoTec */
+}
+
+.welcome-header p {
+  color: #666;
+  font-size: 1.1rem;
+}
+
+/* --- GRID DE TARJETAS --- */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive automático */
+  gap: 30px;
+}
+
+.card {
+  background: white;
+  border-radius: 15px;
+  padding: 30px;
+  text-decoration: none;
+  color: inherit;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+  transition: transform 0.3s, box-shadow 0.3s;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+/* Efecto al pasar el ratón */
+.card:hover {
+  transform: translateY(-5px); /* Se levanta un poco */
+  box-shadow: 0 10px 25px rgba(230, 0, 0, 0.15); /* Sombra rojiza */
+  border-color: #ffe6e6;
+}
+
+.icon-box {
+  width: 70px;
+  height: 70px;
+  background-color: #fff0f0; /* Rojo muy muy clarito */
+  color: #e60000;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.card:hover .icon-box {
+  background-color: #e60000;
+  color: white;
+}
+
+.card-info h3 {
+  margin-bottom: 10px;
+  color: #333;
+  font-size: 1.3rem;
+}
+
+.card-info p {
+  color: #777;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
+}
+
+.arrow {
+  margin-top: auto; /* Empuja la flecha al fondo */
+  font-weight: bold;
+  color: #ddd;
+  transition: color 0.3s;
+}
+
+.card:hover .arrow {
+  color: #e60000;
+}

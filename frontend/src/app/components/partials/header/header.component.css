@@ -133,3 +133,91 @@ header {
 .logo img:hover {
   transform: scale(1.05);
 }
+
+.guest-menu {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+/* --- TEXTO DE BIENVENIDA (HOLA, ALBERTO) --- */
+.welcome-text {
+    color: #e60000; /* ¡AQUÍ ESTÁ EL ROJO! */
+    font-weight: 700; /* Un poco más gordito para que se lea bien */
+    margin-right: 10px;
+    font-size: 1.05rem;
+}
+
+/* --- ENLACE MI CUENTA / INVITADO --- */
+.user-link, .login-btn {
+    color: #333; /* El resto del texto en gris oscuro/negro para que no sature */
+    text-decoration: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.user-link:hover, .login-btn:hover {
+    color: #e60000; /* Al pasar el ratón, también se pone rojo */
+}
+
+/* --- BOTÓN DE LOGIN (INVITADO) --- */
+.login-btn {
+    border: 1px solid #e60000;
+    padding: 5px 15px;
+    border-radius: 20px;
+    color: #e60000;
+    background: white;
+}
+
+.login-btn:hover {
+    background: #e60000;
+    color: white;
+}
+
+.login-btn {
+    background-color: white;
+    color: #e60000; /* Rojo InfoTec */
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.login-btn:hover {
+    background-color: #f0f0f0;
+}
+
+.user-link {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Estilo simple para el dropdown */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+}
+.dropdown-content a:hover {background-color: #f1f1f1}

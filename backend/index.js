@@ -1,48 +1,44 @@
-// backend/index.js (¡Esta es la versión CORREGIDA!)
-
 const express = require("express");
-const cors = require("cors"); // <--- 1. ¡OJO! No tenías CORS, lo necesitas
-const connectDB = require("./db");
+const cors = require("cors");
+const connectDB = require("./db"); // <--- USAMOS TU ARCHIVO db.js QUE SÍ FUNCIONA
+
+// --- 1. IMPORTAR RUTAS ---
 const productRoutes = require("./routes/products.routes");
+const userRoutes = require('./routes/user.routes');
 const reviewRoutes = require("./routes/reviews.routes");
-
-
-// --- 2. RUTAS (¡Nombres en inglés!) ---
-// Asumimos que has renombrado 'rutas/productos.js' a 'routes/products.routes.js'
-const productsRouter = require("./routes/products.routes.js"); 
+const orderRoutes = require('./routes/order.routes');
 
 const app = express();
 const PORT = 3000;
 
-// --- 3. MIDDLEWARES ---
+// --- 2. MIDDLEWARES ---
 
-// Para que Express entienda JSON
-app.use(express.json());
-
-// Para que Angular (en :4200) pueda hablar con este servidor (en :3000)
-// Esto arregla el error de CORS
+// CORS: Permite que Angular entre
 app.use(cors({
   origin: 'http://localhost:4200'
 }));
 
-// ----------------------
+// JSON: Permite leer los datos del registro
+app.use(express.json());
 
-// Conexión a MongoDB
-connectDB();
 
-// Ruta de prueba
+// --- 3. CONEXIÓN A MONGODB ---
+// Llamamos a la función de tu archivo db.js
+connectDB(); 
+
+
+// --- 4. RUTAS ---
 app.get("/", (req, res) => {
   res.send("Servidor (Backend) funcionando 🚀");
 });
 
+app.use("/api/products", productRoutes);
+app.use("/api/users", userRoutes);
+app.use("/api/reviews", reviewRoutes);
+app.use('/api/orders', orderRoutes);
 
-// La convención es usar '/api/' para todas las rutas de la API
-app.use("/api/products", productsRouter); // Antes '/productos'
 
-// Arrancamos el servidor
+// --- 5. ARRANCAR SERVIDOR ---
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
-
-  app.use("/api/products", productRoutes);
-app.use("/api/reviews", reviewRoutes);
 });

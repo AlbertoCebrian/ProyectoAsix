@@ -1,0 +1,131 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin-top: 2rem;
+  margin-bottom: 4rem;
+  min-height: 80vh;
+}
+
+.checkout-layout {
+  display: flex;
+  width: 100%;
+  max-width: 1100px;
+  gap: 2rem;
+  padding: 0 1rem;
+}
+
+/* --- COLUMNA IZQUIERDA (FORMULARIO) --- */
+.form-section {
+  flex: 3; /* Ocupa más espacio */
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+}
+
+.section-title {
+  margin-bottom: 1.5rem;
+  color: #333;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+  color: #555;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  outline: none;
+  box-sizing: border-box;
+}
+
+input:focus {
+  border-color: #e60000;
+}
+
+/* --- COLUMNA DERECHA (RESUMEN) --- */
+.summary-section {
+  flex: 2; /* Ocupa menos espacio */
+  background: #f9f9f9;
+  padding: 2rem;
+  border-radius: 10px;
+  border: 1px solid #eee;
+  height: fit-content; /* Se ajusta al contenido */
+}
+
+.order-items {
+  margin-bottom: 1.5rem;
+  max-height: 300px;
+  overflow-y: auto; /* Scroll si hay muchos productos */
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+  color: #555;
+  border-bottom: 1px dotted #ccc;
+  padding-bottom: 5px;
+}
+
+.price {
+  font-weight: bold;
+  color: #333;
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #e60000;
+  border-top: 2px solid #ddd;
+  padding-top: 15px;
+  margin-top: 20px;
+}
+
+/* --- BOTÓN DE PAGO --- */
+.btn-pay {
+  width: 100%;
+  background-color: #e60000;
+  color: white;
+  padding: 15px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 20px;
+  transition: background 0.3s;
+}
+
+.btn-pay:hover {
+  background-color: #cc0000;
+}
+
+.btn-pay:disabled {
+  background-color: #ffcccc;
+  cursor: not-allowed;
+}
+
+/* RESPONSIVE (Móvil) */
+@media (max-width: 800px) {
+  .checkout-layout {
+    flex-direction: column; /* Uno debajo del otro */
+  }
+}

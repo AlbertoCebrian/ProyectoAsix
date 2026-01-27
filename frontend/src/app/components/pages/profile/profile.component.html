@@ -1,0 +1,61 @@
+<div class="container">
+  
+  <div class="profile-layout">
+    
+    <div class="user-card">
+      <div class="avatar-circle">
+        {{ user.name.charAt(0).toUpperCase() }} </div>
+      <h2>{{ user.name }}</h2>
+      <p class="user-role">Miembro de InfoTec</p>
+
+      <div class="stats-box">
+        <div class="stat">
+          <span class="stat-value">{{ points }}</span>
+          <span class="stat-label">Puntos</span>
+        </div>
+        <div class="stat separator"></div>
+        <div class="stat">
+          <span class="stat-value">Oro</span>
+          <span class="stat-label">Nivel</span>
+        </div>
+      </div>
+
+      <div class="points-bar">
+        <div class="fill" style="width: 70%"></div>
+      </div>
+      <p class="next-level">Faltan 250 puntos para Platino</p>
+    </div>
+
+    <div class="data-card">
+      <h3>Mis Datos Personales</h3>
+      
+      <form [formGroup]="profileForm" (ngSubmit)="saveChanges()">
+        
+        <div class="form-grid">
+          <div class="form-group">
+            <label>Nombre Completo</label>
+            <input type="text" formControlName="name">
+          </div>
+
+          <div class="form-group">
+            <label>Correo Electrónico</label>
+            <input type="email" formControlName="email" class="disabled-input">
+          </div>
+
+          <div class="form-group">
+            <label>Dirección de Envío</label>
+            <input type="text" formControlName="address">
+          </div>
+
+          <div class="form-group">
+            <label>Teléfono</label>
+            <input type="text" formControlName="phone">
+          </div>
+        </div>
+
+        <button type="submit" class="btn-save">Guardar Cambios</button>
+      </form>
+    </div>
+
+  </div>
+</div>

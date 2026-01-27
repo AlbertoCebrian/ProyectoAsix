@@ -1,5 +1,6 @@
 <header>
   <div class="header-container">
+    
     <a routerLink="/" class="logo">
       <img src="/assets/logoheader.png" alt="InfoTec">
     </a>
@@ -12,30 +13,36 @@
         (keyup.enter)="search(sInput.value)" 
       />
       <button (click)="search(sInput.value)">
-        <i class="fas fa-search"></i> </button>
+        <i class="fas fa-search"></i> 
+      </button>
     </div>
 
     <nav class="nav-links">
-      <a routerLink="/login">
-        <i class="fa fa-user"></i> Login
-      </a>
 
-      <div class="menu-container">
-        <a routerLink="/dashboard">
-          <i class="fa fa-user-circle"></i> Cuenta
-        </a>
-        <div class="menu">
-          <a routerLink="/profile">Perfil</a>
-          <a routerLink="/orders">Pedidos</a>
-          <a>Logout</a>
+        <div *ngIf="!user.token" class="guest-menu">
+            <span class="welcome-text">Hola, Invitado</span>
+            <a routerLink="/login" class="login-btn">Iniciar Sesión</a>
         </div>
-      </div>
 
-      <a routerLink="/cart-page" class="cart-link">
-        <i class="fa fa-shopping-cart"></i>
-        <span class="cart-count">0</span>
-      </a>
-    </nav>
-  </div>
-  
+        <div *ngIf="user.token" class="user-menu">
+            <span class="welcome-text">Hola, {{ user.name }}</span>
+            
+            <div class="dropdown">
+                <a routerLink="/dashboard" class="user-link">
+                    <i class="fas fa-user-circle"></i> Mi Cuenta
+                </a>
+                <div class="dropdown-content">
+                    <a routerLink="/profile">Perfil</a>
+                    <a routerLink="/orders">Mis Pedidos</a>
+                    <a (click)="logout()">Cerrar Sesión</a>
+                </div>
+            </div>
+        </div>
+
+        <a routerLink="/cart-page" class="cart-link">
+            <i class="fas fa-shopping-cart"></i>
+            <span *ngIf="cartQuantity > 0" class="cart-count">{{ cartQuantity }}</span>
+        </a>
+
+    </nav> </div> 
 </header>
