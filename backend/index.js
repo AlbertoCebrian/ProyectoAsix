@@ -36,7 +36,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // Cualquier ruta que no sea API, la enviamos al index.html de Angular
 // Esto es vital para que al recargar la página no te dé error 404
-app.get('*', (req, res) => {
+app.get(/.*/, (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
 
