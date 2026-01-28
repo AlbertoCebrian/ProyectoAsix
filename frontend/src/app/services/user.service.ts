@@ -21,8 +21,8 @@ interface IUserRegister {
 export class UserService {
   
   // URL del Backend
-  private readonly USER_LOGIN_URL = 'http://localhost:3000/api/users/login';
-  private readonly USER_REGISTER_URL = 'http://localhost:3000/api/users/register';
+  private readonly USER_LOGIN_URL = 'api/users/login';
+  private readonly USER_REGISTER_URL = 'api/users/register';
 
   // BehaviorSubject: Para saber en todo momento quién es el usuario actual
   private userSubject = new BehaviorSubject<User>(this.getUserFromLocalStorage());

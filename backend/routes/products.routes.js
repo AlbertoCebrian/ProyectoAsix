@@ -47,30 +47,40 @@ router.post("/", async (req, res) => {
   }
 });
 
-// 4. PUT: Actualizar producto
-router.put("/:id", async (req, res) => {
-  try {
-    const updatedProduct = await Product.findByIdAndUpdate(
-      req.params.id,
-      req.body,
-      { new: true }
-    );
-    if (!updatedProduct) return res.status(404).json({ message: "Product not found" });
-    res.json(updatedProduct);
-  } catch (error) {
-    res.status(400).json({ message: error.message });
-  }
+
+
+
+router.put('/:id', async (req, res) => {
+    try {
+        const updatedProduct = await Product.findByIdAndUpdate(
+            req.params.id, 
+            req.body, 
+            { new: true } // Devuelve el producto ya cambiado
+        );
+        res.send(updatedProduct);
+    } catch (error) {
+        res.status(500).send("Error al actualizar");
+    }
 });
 
-// 5. DELETE: Borrar producto
-router.delete("/:id", async (req, res) => {
-  try {
-    const deletedProduct = await Product.findByIdAndDelete(req.params.id);
-    if (!deletedProduct) return res.status(404).json({ message: "Product not found" });
-    res.json({ message: "Product deleted" });
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
+router.delete('/:id', async (req, res) => {
+    try {
+        await Product.findByIdAndDelete(req.params.id);
+        res.send({ message: "Producto eliminado" });
+    } catch (error) {
+        res.status(500).send("Error al borrar");
+    }
 });
 
+module.exports = router;
+router.post('/', async (req, res) => {
+  try {
+    const newProduct = new Product(req.body);
+    await newProduct.save();
+    res.send(newProduct);
+  } catch (error) {
+    console.error("Error al guardar producto:", error);
+    res.status(500).send("Error al guardar el producto");
+  }
+});
 module.exports = router;

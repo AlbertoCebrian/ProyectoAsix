@@ -10,7 +10,8 @@ import { DashboardComponent } from './components/pages/dashboard/dashboard.compo
 import { ProfileComponent } from './components/pages/profile/profile.component';
 import { CheckoutPageComponent } from './components/pages/checkout-page/checkout-page.component';
 import { OrdersPageComponent } from './components/pages/orders/orders.component';
-
+import { AdminProductsComponent } from './components/pages/admin-products/admin-products.component';
+import { authGuard } from './auth.guard';
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'products', component: ProductsPageComponent }, 
@@ -22,4 +23,10 @@ export const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'checkout', component: CheckoutPageComponent },
   { path: 'orders', component: OrdersPageComponent },
+  
+  { 
+    path: 'admin/products', 
+    component: AdminProductsComponent,
+    canActivate: [authGuard] // <--- 2. ¡AQUÍ PONES EL CANDADO!
+  },
 ];

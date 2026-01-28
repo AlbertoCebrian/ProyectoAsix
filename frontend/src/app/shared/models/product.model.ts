@@ -7,7 +7,7 @@ export type ProductCategory = "cpu" | "gpu" | "ram" | "ssd" | "hdd" |
 
 // 2. La interfaz 'Product' debe tener todas las propiedades en inglés
 export interface Product {
-  _id: string; // Mongo siempre añade un _id
+  _id?: string; // Mongo siempre añade un _id
   name: string;
   price: number;
   category: ProductCategory; // Usamos el tipo actualizado

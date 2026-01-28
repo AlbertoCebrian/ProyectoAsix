@@ -1,18 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { OrdersComponent } from './orders.component';
+// 1. CORRECCIÓN: El nombre correcto es OrdersPageComponent
+import { OrdersPageComponent } from './orders.component';
 
-describe('OrdersComponent', () => {
-  let component: OrdersComponent;
-  let fixture: ComponentFixture<OrdersComponent>;
+describe('OrdersPageComponent', () => {
+  let component: OrdersPageComponent; // 2. Aquí también
+  let fixture: ComponentFixture<OrdersPageComponent>; // 3. Y aquí
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [OrdersComponent]
+      imports: [OrdersPageComponent] // 4. Y en los imports
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(OrdersComponent);
+    fixture = TestBed.createComponent(OrdersPageComponent); // 5. Y al crear el componente
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

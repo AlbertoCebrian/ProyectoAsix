@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class OrderService {
 
   // URL de tu Backend
-  private ORDER_URL = 'http://localhost:3000/api/orders/create';
+  private ORDER_URL = 'api/orders/create';
 
   constructor(private http: HttpClient) { }
 
@@ -19,6 +19,6 @@ export class OrderService {
     
   }
   getAllForUser(userId: string): Observable<Order[]> {
-    return this.http.get<Order[]>(`http://localhost:3000/api/orders/user/${userId}`);
+    return this.http.get<Order[]>(`api/orders/user/${userId}`);
   }
 }

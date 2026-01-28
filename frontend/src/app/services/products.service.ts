@@ -9,8 +9,8 @@ import { Product } from '../shared/models/product.model';
 export class ProductService {
 
   // URLs de tu Backend
-  private readonly API_URL = 'http://localhost:3000/api/products';
-  private readonly REVIEWS_URL = 'http://localhost:3000/api/reviews'; 
+  private readonly API_URL = '/api/products';
+  private readonly REVIEWS_URL = '/api/reviews'; 
 
   constructor(private http: HttpClient) { }
 
@@ -44,5 +44,17 @@ export class ProductService {
   // 4. PUBLICAR RESEÑA (Esto también te faltaba)
   addReview(reviewData: any): Observable<any> {
     return this.http.post<any>(this.REVIEWS_URL, reviewData);
+  }
+  createProduct(product: Product): Observable<Product> {
+    return this.http.post<Product>(this.API_URL, product);
+  }
+
+  updateProduct(product: Product): Observable<Product> {
+    // CORRECCIÓN: Cambiamos 'product.id' por 'product._id'
+    return this.http.put<Product>(`${this.API_URL}/${product._id}`, product);
+  }
+
+  deleteProduct(productId: string): Observable<any> {
+    return this.http.delete<any>(`${this.API_URL}/${productId}`);
   }
 }

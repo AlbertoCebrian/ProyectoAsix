@@ -1,0 +1,122 @@
+<div class="container">
+  <h1>Panel de Administración</h1>
+  
+  <h2>{{ editMode ? 'Editar Producto' : 'Subir Nuevo Producto' }}</h2>
+
+  <div class="admin-layout">
+    
+    <form [formGroup]="productForm" (ngSubmit)="submit()" class="admin-form">
+      
+      <div class="form-group">
+        <label>Nombre del Producto</label>
+        <input type="text" formControlName="name" placeholder="Ej: PC Gaming Ultra...">
+      </div>
+      
+      <div class="row">
+        <div class="form-group">
+          <label>Precio (€)</label>
+          <input type="number" formControlName="price">
+        </div>
+        <div class="form-group">
+            <label>Stock</label>
+            <input type="number" formControlName="stock">
+          </div>
+      </div>
+
+      <div class="form-group">
+        <label>URL Imagen (separadas por coma)</label>
+        <input type="text" formControlName="imageUrl" placeholder="http://imagen1.jpg, http://imagen2.jpg">
+        <small style="display:block; margin-top:5px; color:#888;">Copia la dirección de la imagen de Google y pégala aquí.</small>
+      </div>
+
+      <div class="form-group">
+        <label>Categoría</label>
+        <select formControlName="category">
+          <option value="others">Otros</option>
+          <option value="cpu">Procesadores</option>
+          <option value="gpu">Gráficas</option>
+          <option value="motherboard">Placas Base</option>
+          <option value="ram">Memoria RAM</option>
+          <option value="ssd">Discos / SSD</option>
+          <option value="case">Torres</option>
+          <option value="psu">Fuentes</option>
+          <option value="cooling">Refrigeración</option>
+          <option value="display">Monitores</option>
+          <option value="keyboard">Teclados</option>
+          <option value="mouse">Ratones</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Descripción (Marketing)</label>
+        <textarea formControlName="description" rows="4" placeholder="Detalles generales del producto..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label style="color: #e60000;">⚡ Especificaciones Técnicas (Auto-Tabla)</label>
+        <textarea formControlName="attributesText" rows="6" 
+          placeholder="Pega aquí la lista técnica tal cual. Ej:
+Marca: Logitech
+Peso: 63g
+Sensor: HERO 25K"></textarea>
+        <small style="color: #666; display: block; margin-top: 5px;">
+           El sistema detectará los "Dos Puntos (:)" y creará la tabla de especificaciones automáticamente.
+        </small>
+      </div>
+
+      <button type="submit" [disabled]="isSubmitting" 
+              [class]="editMode ? 'btn-update' : 'btn-upload'">
+        {{ editMode ? 'Guardar Cambios 💾' : 'Publicar Producto 🚀' }}
+      </button>
+
+      <button *ngIf="editMode" type="button" class="btn-cancel" (click)="resetForm()">
+        Cancelar Edición
+      </button>
+    </form>
+
+    <div class="preview">
+        <h3>Vista Previa</h3>
+        <div class="card-preview">
+          <img [src]="fc['imageUrl'].value ? fc['imageUrl'].value.split(',')[0] : 'https://upload.wikimedia.org/wikipedia/commons/1/14/No_Image_Available.jpg'" 
+               alt="Preview"
+               style="object-fit: contain;">
+          
+          <div class="info">
+              <h4>{{ fc['name'].value || 'Nombre del producto...' }}</h4>
+              <span class="price">{{ fc['price'].value | currency:'EUR' }}</span>
+          </div>
+        </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+  <h2>Lista de Productos ({{ products.length }})</h2>
+
+  <div class="table-container">
+    <table>
+      <thead>
+        <tr>
+          <th>Img</th>
+          <th>Nombre</th>
+          <th>Precio</th>
+          <th>Categoría</th>
+          <th>Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of products">
+          <td>
+            <img [src]="p.images?.[0]" alt="img" class="table-img">
+          </td>
+          <td>{{ p.name }}</td>
+          <td>{{ p.price | currency:'EUR' }}</td>
+          <td><span class="badge">{{ p.category }}</span></td>
+          <td class="actions">
+            <button (click)="startEdit(p)" class="btn-edit" title="Editar">✏️</button>
+            <button (click)="deleteProduct(p)" class="btn-delete" title="Borrar">🗑️</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

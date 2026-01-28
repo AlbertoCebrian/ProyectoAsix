@@ -74,7 +74,7 @@ export class CheckoutPageComponent implements OnInit {
     setTimeout(() => {
         this.orderService.create(this.order).subscribe({
           next: () => {
-            // alert('¡Pedido realizado con éxito! 📦'); // Opcional, mejor redirigir directo
+            // alert('¡Pedido realizado con éxito!'); // Opcional, mejor redirigir directo
             this.cartService.clearCart(); // Vaciamos el carrito
             this.router.navigateByUrl('/orders'); // Vamos a la página de pedidos
             this.isSubmitting = false;

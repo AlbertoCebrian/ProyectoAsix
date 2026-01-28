@@ -37,7 +37,7 @@ export class CartPageComponent implements OnInit {
   }
 
   removeFromCart(cartItem: CartItem) {
-    this.cartService.removeFromCart(cartItem.product._id);
+    this.cartService.removeFromCart(cartItem.product._id!);
   }
 
   // Nueva lógica para botones + y -
@@ -47,6 +47,6 @@ export class CartPageComponent implements OnInit {
     if (newQuantity < 1) return; 
     if (newQuantity > 10) return; // Límite arbitrario de 10 por seguridad
 
-    this.cartService.changeQuantity(cartItem.product._id, newQuantity);
+    this.cartService.changeQuantity(cartItem.product._id!, newQuantity);
   }
 }

@@ -66,7 +66,7 @@ export class ProductDetailsComponent implements OnInit {
 
     this.productService.addReview(reviewPayload).subscribe(response => {
       this.newReview = { userName: '', comment: '', rating: 5 };
-      this.loadReviews(this.product._id); 
+      this.loadReviews(this.product._id!); 
     });
   }
   
