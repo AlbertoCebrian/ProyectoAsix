@@ -1,22 +1,32 @@
 import { HttpInterceptorFn } from '@angular/common/http';
 
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
-  // 1. Recuperamos el token del navegador
-  // OJO: Asegúrate de que en tu login lo guardaste con el nombre 'token' o 'access_token'
-  // Si no estás seguro, mira en tu navegador -> F12 -> Application -> Local Storage
-  const token = localStorage.getItem('token'); 
+  
+  // 1. Buscamos la caja "User" (que es lo que sale en tu Key)
+  const userJson = localStorage.getItem('User'); 
+  let token = null;
 
-  // 2. Si existe el token, clonamos la petición y le inyectamos la cabecera
+  // 2. Si existe el usuario, abrimos la caja (JSON.parse) y sacamos el token
+  if (userJson) {
+    try {
+      const userObj = JSON.parse(userJson);
+      token = userObj.token; // Aquí es donde está realmente el churro largo
+    } catch (e) {
+      console.error('Error al leer el usuario', e);
+    }
+  }
+
+  // --- LOGS PARA CONFIRMAR (Verás que ahora sí sale SÍ) ---
+  console.log('🕵️ INTERCEPTOR: ¿Encontré token dentro de User?', token ? 'SÍ ✅' : 'NO ❌');
+
   if (token) {
     const cloned = req.clone({
       setHeaders: {
         Authorization: `Bearer ${token}`
       }
     });
-    // 3. Enviamos la petición modificada
     return next(cloned);
   }
 
-  // 4. Si no hay token, enviamos la original
   return next(req);
 };
