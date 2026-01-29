@@ -17,7 +17,7 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   }
 
   // --- LOGS PARA CONFIRMAR (Verás que ahora sí sale SÍ) ---
-  console.log('🕵️ INTERCEPTOR: ¿Encontré token dentro de User?', token ? 'SÍ ✅' : 'NO ❌');
+
 
   if (token) {
     const cloned = req.clone({
