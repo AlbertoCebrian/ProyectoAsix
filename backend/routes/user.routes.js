@@ -4,8 +4,8 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user.model');
 
-// CLAVE SECRETA (En producción iría en .env)
-const JWT_SECRET = "mi_clave_secreta_super_segura_123"; 
+
+const JWT_SECRET = process.env.JWT_SECRET; 
 
 // --- LOGIN (POST /api/users/login) ---
 router.post('/login', async (req, res) => {

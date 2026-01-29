@@ -2,18 +2,19 @@ const express = require("express");
 const router = express.Router();
 const Product = require("../models/product.model");
 
-// 1. GET: Obtener productos (con filtros por categoría Y/O por nombre)
+// IMPORTANTE: Importamos al "portero"
+const auth = require("../middleware/auth"); 
+
+// 1. GET: Obtener productos (PÚBLICO - Todo el mundo puede verlos)
 router.get("/", async (req, res) => {
   try {
     const { category, searchTerm } = req.query;
     let filter = {};
 
-    // Si hay categoría, filtramos por ella
     if (category) {
       filter.category = category;
     }
 
-    // Si hay término de búsqueda, buscamos en el nombre (ignorando mayúsculas)
     if (searchTerm) {
       filter.name = { $regex: searchTerm, $options: 'i' };
     }
@@ -25,7 +26,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// 2. GET: Obtener UN solo producto por ID (¡Esta faltaba y es vital para el detalle!)
+// 2. GET: Obtener UN solo producto (PÚBLICO)
 router.get("/:id", async (req, res) => {
   try {
     const product = await Product.findById(req.params.id);
@@ -36,8 +37,12 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// 3. POST: Crear producto
-router.post("/", async (req, res) => {
+// ==========================================
+//    ZONA PROTEGIDA (SOLO ADMINS) 
+// ==========================================
+
+// 3. POST: Crear producto (AQUÍ PONEMOS EL 'auth')
+router.post("/", auth, async (req, res) => {
   const newProduct = new Product(req.body);
   try {
     const savedProduct = await newProduct.save();
@@ -47,15 +52,13 @@ router.post("/", async (req, res) => {
   }
 });
 
-
-
-
-router.put('/:id', async (req, res) => {
+// 4. PUT: Editar producto (PROTEGIDO)
+router.put('/:id', auth, async (req, res) => {
     try {
         const updatedProduct = await Product.findByIdAndUpdate(
             req.params.id, 
             req.body, 
-            { new: true } // Devuelve el producto ya cambiado
+            { new: true } 
         );
         res.send(updatedProduct);
     } catch (error) {
@@ -63,7 +66,8 @@ router.put('/:id', async (req, res) => {
     }
 });
 
-router.delete('/:id', async (req, res) => {
+// 5. DELETE: Borrar producto (PROTEGIDO)
+router.delete('/:id', auth, async (req, res) => {
     try {
         await Product.findByIdAndDelete(req.params.id);
         res.send({ message: "Producto eliminado" });
@@ -72,15 +76,4 @@ router.delete('/:id', async (req, res) => {
     }
 });
 
-module.exports = router;
-router.post('/', async (req, res) => {
-  try {
-    const newProduct = new Product(req.body);
-    await newProduct.save();
-    res.send(newProduct);
-  } catch (error) {
-    console.error("Error al guardar producto:", error);
-    res.status(500).send("Error al guardar el producto");
-  }
-});
 module.exports = router;
